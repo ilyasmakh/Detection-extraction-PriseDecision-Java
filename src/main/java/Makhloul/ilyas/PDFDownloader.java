@@ -11,8 +11,25 @@ import java.nio.file.StandardCopyOption;
 
 public class PDFDownloader {
     public static void main(String[] args) {
-        String fileURL = "https://www.boamp.fr/telechargements/FILES/PDF/2025/03/25-26677.pdf";
-        String savePath = "C:/Users/pc/Downloads/25-26677.pdf"; // Modifier selon ton système
+        //version 1
+        getFile("15-79358" ,  "2015" , null,"BOAMP-J-AO_2015_146008") ;
+        // version 2
+        getFile("25-26618" ,  "2025" , "03","25-26618") ;
+    }
+
+    public static void getFile(String idweb , String annee , String mois, String fileName){
+
+       String fileURL= "" ;
+        if(fileName.equals(idweb)){
+            // https://www.boamp.fr/telechargements/FILES/PDF/2025/03/25-26618.pdf
+            fileURL = "https://www.boamp.fr/telechargements/FILES/PDF/"+annee+"/"+mois+"/"+idweb+".pdf";
+        }
+        else {
+         //   https://www.boamp.fr/telechargements/PDF/2015/BOAMP-J-AO_2015_146008/15-79358.pdf
+            fileURL = "https://www.boamp.fr/telechargements/PDF/"+annee+"/"+fileName+"/"+idweb+".pdf";
+        }
+
+        String savePath = "C:/Users/pc/Downloads/"+idweb+".pdf"; // Modifier selon ton système
 
         try {
             downloadFile(fileURL, savePath);
@@ -20,6 +37,7 @@ public class PDFDownloader {
         } catch (IOException e) {
             System.err.println("Erreur lors du téléchargement : " + e.getMessage());
         }
+
     }
 
     public static void downloadFile(String fileURL, String savePath) throws IOException {
